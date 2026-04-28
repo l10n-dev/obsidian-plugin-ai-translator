@@ -23,3 +23,4 @@ data.json
 
 # Exclude obsidian developer docs
 obsidian-developer-docs
+apil10ndev*.json
