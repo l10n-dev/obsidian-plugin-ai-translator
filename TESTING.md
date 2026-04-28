@@ -8,7 +8,11 @@
 
 ---
 
-## 1. Build the plugin
+## 1. Get the plugin files
+
+**For testing a release** — download `main.js`, `manifest.json`, and `styles.css` from the [latest release](../../releases/latest).
+
+**For local development** — build from source:
 
 ```bash
 npm install
