@@ -3,7 +3,7 @@
 	"name": "L10n.dev - AI Translator",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Translate your notes with AI using l10n.dev",
+	"description": "Translate notes into any of 165 languages with AI. Preserves Markdown formatting and structure. Powered by L10n.dev's AI translation API.",
 	"author": "l10n.dev",
 	"authorUrl": "https://l10n.dev",
 	"isDesktopOnly": false
