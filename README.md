@@ -1,90 +1,74 @@
-# Obsidian Sample Plugin
+﻿# L10n.dev - AI Translator for Obsidian
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+Translate your Obsidian notes using [l10n](https://l10n.dev).dev — an AI-powered localization API. Works on desktop and mobile.
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+## Features
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open modal (simple)" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+- Context-aware translations using advanced AI. Translate to 165+ languages.
+- Preserves Markdown formatting and struvture.
+- Translate the active note via the command palette, ribbon icon, or right-click context menu.
+- Dynamic language search — type a language name to find it instantly (no hardcoded list)
+- Remembers your last used language — one keypress to repeat the same translation.
+- Three output modes: create a new note, replace the current note, or append the translation.
+- Optional YAML frontmatter preservation — translate only the note body if desired.
+- Shows characters used and remaining balance after each translation.
+- Mobile-compatible — uses Obsidian's native network layer, no Node.js APIs
 
-## First time developing plugins?
+## Requirements
 
-Quick starting guide for new plugin devs:
+A free [l10n.dev](https://l10n.dev) account. You receive **30,000 characters free per month** after signing up. Get your API key at [l10n.dev/ws/keys](https://l10n.dev/ws/keys).
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+## Installation
 
-## Releasing new releases
+### Community plugin (recommended)
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+1. Open **Settings → Community plugins** and select **Browse**.
+2. Search for **L10n.dev - AI Translator**.
+3. Select **Install**, then **Enable**.
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+### Manual installation
 
-## Adding your plugin to the community plugin list
+1. Go to the [latest release](../../releases/latest) and download `manifest.json`, `main.js`, and `styles.css`.
+2. In your vault, create the folder `<YourVault>/.obsidian/plugins/ai-translator/`.
+3. Copy the three downloaded files into that folder.
+4. Open Obsidian, go to **Settings → Community plugins**, and enable **L10n.dev - AI Translator**.
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+## Setup
 
-## How to use
+1. Open **Settings → L10n.dev - AI Translator**.
+2. Paste your l10n.dev API key into the **API key** field.
+3. Choose your preferred **Output behavior** and toggle **Translate frontmatter** as needed.
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+## Usage
 
-## Manually installing the plugin
+With a note open, trigger translation in any of these ways:
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+- **Command palette** — run `Translate current note`
+- **Ribbon** — select the globe icon in the left sidebar
+- **Context menu** — right-click a file in the file explorer or inside the editor and select **Translate…**
 
-## Improve code quality with eslint
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- This project already has eslint preconfigured, you can invoke a check by running`npm run lint`
-- Together with a custom eslint [plugin](https://github.com/obsidianmd/eslint-plugin) for Obsidan specific code guidelines.
-- A GitHub action is preconfigured to automatically lint every commit on all branches.
+A language picker will open. Type a language name (e.g. "Spanish", "German", "Japanese") and select your target language. The translation will be saved according to your output behavior setting.
 
-## Funding URL
+### Repeat translation to the same language
 
-You can include funding URLs where people who use your plugin can financially support it.
+After your first translation, the last used language is saved automatically. The next time the language picker opens, it pre-selects that language — press Enter to confirm without typing anything.
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+For even faster repeat translations, use the **Translate to last used language** command from the command palette. It skips the language picker entirely and translates immediately. Assign a hotkey to it in **Settings → Hotkeys** for one-keystroke translation.
 
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
+## Output behavior
 
-If you have multiple URLs, you can also do:
+| Setting | Result |
+|---|---|
+| Create a new note (default) | Saves translation as `{filename} ({lang-code}).md` in the same folder |
+| Replace current note content | Overwrites the current note with the translation |
+| Append to current note | Appends the translation below a horizontal rule |
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
+## Privacy
 
-## API Documentation
+Translation requests are sent to the [AI translation API](https://api.l10n.dev/doc/#tag/ai-translation) over HTTPS. l10n.dev does not store your content after translation. See the [l10n.dev terms of service](https://l10n.dev/terms-of-service) for details.
 
-See https://docs.obsidian.md
+No telemetry or analytics are collected by this plugin.
+
+## License
+
+[MIT](LICENSE)
