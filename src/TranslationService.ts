@@ -36,7 +36,6 @@ export class TranslationService {
 		apiKey: string,
 		req: TranslateRequest,
 	): Promise<TranslateResponse> {
-		console.debug("[AI Translator] Sending translation request:", req);
 		const response = await requestUrl({
 			url: `${API_BASE}/v2/translate`,
 			method: "POST",

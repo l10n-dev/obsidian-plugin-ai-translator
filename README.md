@@ -2,6 +2,8 @@
 
 Translate your Obsidian notes using [l10n](https://l10n.dev).dev — an AI-powered localization API. Works on desktop and mobile.
 
+<img src="docs/demo.gif" alt="L10n.dev - AI Translator for Obsidian">
+
 ## Features
 
 - Context-aware translations using advanced AI. Translate to 165+ languages.

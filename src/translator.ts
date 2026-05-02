@@ -65,10 +65,7 @@ async function doTranslate(
 				"Insufficient balance. Top up at https://l10n.dev/#pricing",
 			);
 		} else {
-			console.error("[AI Translator]", err);
-			new Notice(
-				"Translation failed. Check the developer console for details.",
-			);
+			new Notice("Translation failed. Please try again.");
 		}
 		return;
 	}
@@ -105,8 +102,7 @@ async function doTranslate(
 		new Notice(
 			`Translation complete. Used ${charsUsed.toLocaleString()} characters.${balanceText}`,
 		);
-	} catch (err) {
-		console.error("[AI Translator]", err);
+	} catch {
 		new Notice("Failed to save the translated note.");
 	}
 }
