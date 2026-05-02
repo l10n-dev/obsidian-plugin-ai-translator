@@ -10,7 +10,6 @@ export default class L10nPlugin extends Plugin {
 		await this.loadSettings();
 
 		this.addRibbonIcon("languages", "Translate note", () => {
-			console.debug("[AI Translator] Translating active note");
 			translateActiveNote(this);
 		});
 
@@ -39,10 +38,6 @@ export default class L10nPlugin extends Plugin {
 						item.setTitle("Translate…")
 							.setIcon("languages")
 							.onClick(() => {
-								console.debug(
-									"[AI Translator] Translating file:",
-									abstractFile.path,
-								);
 								translateActiveNote(this, abstractFile);
 							});
 					});
@@ -59,10 +54,6 @@ export default class L10nPlugin extends Plugin {
 						item.setTitle("Translate to last used language")
 							.setIcon("languages")
 							.onClick(() => {
-								console.debug(
-									"[AI Translator] Translating file to last used language:",
-									abstractFile.path,
-								);
 								translateToLastLanguage(this, abstractFile);
 							});
 					});
@@ -76,9 +67,6 @@ export default class L10nPlugin extends Plugin {
 					item.setTitle("Translate to last used language")
 						.setIcon("languages")
 						.onClick(() => {
-							console.debug(
-								"[AI Translator] Translating current note to last used language",
-							);
 							translateToLastLanguage(this);
 						});
 				});
@@ -91,9 +79,6 @@ export default class L10nPlugin extends Plugin {
 					item.setTitle("Translate…")
 						.setIcon("languages")
 						.onClick(() => {
-							console.debug(
-								"[AI Translator] Translating current note",
-							);
 							translateActiveNote(this);
 						});
 				});
