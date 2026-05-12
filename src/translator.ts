@@ -46,8 +46,9 @@ async function doTranslate(
 			{
 				sourceStrings: sourceText,
 				targetLanguageCode: lang.code,
-				format: "txt",
+				format: "md",
 				useContractions: true,
+				translateMetadata: plugin.settings.translateFrontmatter,
 			},
 		);
 		translated = result.translations;
