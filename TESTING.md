@@ -27,7 +27,7 @@ This produces `main.js` in the repository root.
 
 1. Locate your vault folder. Inside it, open (or create) the directory:
    ```
-   <YourVault>/.obsidian/plugins/ai-translator/
+   <YourVault>/.obsidian/plugins/l10n-ai-translator/
    ```
 2. Copy the following files from the repository root into that folder:
    - `main.js`
@@ -38,7 +38,7 @@ This produces `main.js` in the repository root.
 5. If prompted, select **Turn on community plugins**.
 6. Find **L10n.dev - AI Translator** in the list and toggle it on.
 
-> **Tip:** Clone the repository directly into `<YourVault>/.obsidian/plugins/ai-translator/` and run `npm run dev` for live reloading during development.
+> **Tip:** Clone the repository directly into `<YourVault>/.obsidian/plugins/l10n-ai-translator/` and run `npm run dev` for live reloading during development.
 
 ---
 
@@ -83,7 +83,7 @@ This produces `main.js` in the repository root.
 ## 6. Mobile testing
 
 1. Build `main.js` on desktop (`npm run build`).
-2. Transfer `main.js`, `manifest.json`, and `styles.css` to your vault's `.obsidian/plugins/ai-translator/` folder using a sync solution (e.g. iCloud, Obsidian Sync, or manual file transfer).
+2. Transfer `main.js`, `manifest.json`, and `styles.css` to your vault's `.obsidian/plugins/l10n-ai-translator/` folder using a sync solution (e.g. iCloud, Obsidian Sync, or manual file transfer).
 3. Open Obsidian on the mobile device and enable the plugin as described in step 2.
 4. Repeat the manual test checklist on mobile, paying attention to the language picker and context menu behaviour.
 

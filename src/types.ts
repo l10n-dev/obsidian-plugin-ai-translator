@@ -17,6 +17,7 @@ export interface TranslateRequest {
 	targetLanguageCode: string;
 	format?: string;
 	useContractions?: boolean;
+	translateMetadata?: boolean;
 }
 
 export interface TranslateResponse {
