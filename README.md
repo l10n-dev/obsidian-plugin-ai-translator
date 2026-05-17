@@ -25,15 +25,8 @@ A free [l10n.dev](https://l10n.dev) account. You receive **30,000 characters fre
 ### Community plugin (recommended)
 
 1. Open **Settings → Community plugins** and select **Browse**.
-2. Search for **L10n.dev - AI Translator**.
+2. Search for **L10n.dev - AI Translator** ot **note ai translator**.
 3. Select **Install**, then **Enable**.
-
-### Manual installation
-
-1. Go to the [latest release](../../releases/latest) and download `manifest.json`, `main.js`, and `styles.css`.
-2. In your vault, create the folder `<YourVault>/.obsidian/plugins/note-ai-translator/`.
-3. Copy the three downloaded files into that folder.
-4. Open Obsidian, go to **Settings → Community plugins**, and enable **L10n.dev - AI Translator**.
 
 ## Setup
 
@@ -67,7 +60,7 @@ For even faster repeat translations, use the **Translate to last used language**
 
 ## Privacy
 
-Translation requests are sent to the [AI translation API](https://api.l10n.dev/doc/#tag/ai-translation) over HTTPS. l10n.dev does not store your content after translation. See the [l10n.dev terms of service](https://l10n.dev/terms-of-service) for details.
+Translation requests are sent to the [AI translation API](https://api.l10n.dev/doc/#l10n-api-latest/tag/ai-translation) over HTTPS. l10n.dev does not store your content after translation. See the [l10n.dev terms of service](https://l10n.dev/terms-of-service) for details.
 
 No telemetry or analytics are collected by this plugin.
 
