@@ -49,6 +49,7 @@ async function doTranslate(
 				format: "md",
 				useContractions: true,
 				translateMetadata: plugin.settings.translateFrontmatter,
+				client: "obsidian-plugin",
 			},
 		);
 		translated = result.translations;
