@@ -9,6 +9,7 @@ export interface L10nSettings {
 	apiKey: string;
 	outputBehavior: OutputBehavior;
 	translateFrontmatter: boolean;
+	generateGlossary: boolean;
 	lastLanguage?: Language;
 }
 
@@ -18,6 +19,7 @@ export interface TranslateRequest {
 	format?: string;
 	useContractions?: boolean;
 	translateMetadata?: boolean;
+	generateGlossary?: boolean;
 	client?: string;
 }
 

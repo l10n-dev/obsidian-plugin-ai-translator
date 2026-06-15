@@ -6,7 +6,7 @@ Translate your Obsidian notes using [l10n](https://l10n.dev).dev — an AI-power
 
 ## Features
 
-- Context-aware translations using advanced AI. Translate to 165+ languages.
+- Context-aware translations using advanced AI. Translate to 165+ languages. Generates and save AI glossaries for consistent terminology across translations.
 - Preserves Markdown formatting and struvture.
 - Translate the active note via the command palette, ribbon icon, or right-click context menu.
 - Dynamic language search — type a language name to find it instantly (no hardcoded list)
@@ -18,11 +18,9 @@ Translate your Obsidian notes using [l10n](https://l10n.dev).dev — an AI-power
 
 ## Requirements
 
-A free [l10n.dev](https://l10n.dev) account. You receive **30,000 characters free per month** after signing up. Get your API key at [l10n.dev/ws/keys](https://l10n.dev/ws/keys).
+A free [l10n.dev](https://l10n.dev) account. You receive **10,000 characters free per month** after signing up. Get your API key at [l10n.dev/ws/keys](https://l10n.dev/ws/keys).
 
 ## Installation
-
-### Community plugin (recommended)
 
 1. Open **Settings → Community plugins** and select **Browse**.
 2. Search for **L10n.dev - AI Translator** ot **note ai translator**.
@@ -57,6 +55,18 @@ For even faster repeat translations, use the **Translate to last used language**
 | Create a new note (default) | Saves translation as `{filename} ({lang-code}).md` in the same folder |
 | Replace current note content | Overwrites the current note with the translation |
 | Append to current note | Appends the translation below a horizontal rule |
+
+## Translation Glossary
+
+A translation glossary maps specific source-language terms to approved target-language equivalents, ensuring the AI uses your exact terminology instead of valid-but-unintended synonyms. Glossaries are especially valuable for brand names, legal terms, clinical vocabulary, and product-specific concepts.
+
+### AI Glossary Generation
+
+When **Generate & save glossary** is enabled (config) it automatically builds a glossary from the source and translated target content, then save it as the active glossary for this source/target language pair. Once saved, the glossary is applied automatically on all future translations for the same language pair.
+
+> **Note:** Glossary terms consume characters from your balance during translation. The character cost per translation is the combined length of all source terms, target terms, and context hints.
+
+Manage your saved glossaries at [l10n.dev/ws/translation-glossary](https://l10n.dev/ws/translation-glossary).
 
 ## Privacy
 

@@ -8,6 +8,7 @@ export const DEFAULT_SETTINGS: L10nSettings = {
 	apiKey: "",
 	outputBehavior: "new-note",
 	translateFrontmatter: false,
+	generateGlossary: false,
 };
 
 export class L10nSettingsTab extends PluginSettingTab {
@@ -28,7 +29,7 @@ export class L10nSettingsTab extends PluginSettingTab {
 		const refreshBalance = (apiKey: string) => {
 			if (!apiKey) {
 				quotaEl.setText(
-					` ${(30000).toLocaleString()} characters free monthly.`,
+					` ${(10000).toLocaleString()} characters free monthly.`,
 				);
 				return;
 			}
@@ -41,7 +42,7 @@ export class L10nSettingsTab extends PluginSettingTab {
 				})
 				.catch(() => {
 					quotaEl.setText(
-						` ${(30000).toLocaleString()} characters free monthly.`,
+						` ${(10000).toLocaleString()} characters free monthly.`,
 					);
 				});
 		};
@@ -111,5 +112,26 @@ export class L10nSettingsTab extends PluginSettingTab {
 						await this.plugin.saveSettings();
 					});
 			});
+
+		// Generate glossary
+		const glossarySetting = new Setting(containerEl)
+			.setName("Generate & save glossary")
+			.setDesc(
+				"When enabled, creates a glossary based on the translation to ensure consistency between notes and saves it for future use. ",
+			)
+			.addToggle((toggle) => {
+				toggle
+					.setValue(this.plugin.settings.generateGlossary)
+					.onChange(async (value) => {
+						this.plugin.settings.generateGlossary = value;
+						await this.plugin.saveSettings();
+					});
+			});
+
+		glossarySetting.descEl.createEl("a", {
+			text: "Manage glossaries",
+			href: "https://l10n.dev/ws/translation-glossary",
+			attr: { target: "_blank", rel: "noopener noreferrer" },
+		});
 	}
 }
