@@ -46,7 +46,7 @@ async function doTranslate(
 			{
 				sourceStrings: sourceText,
 				targetLanguageCode: lang.code,
-				format: "md",
+				format: file.extension ?? "md",
 				useContractions: true,
 				translateMetadata: plugin.settings.translateFrontmatter,
 				generateGlossary: plugin.settings.generateGlossary,

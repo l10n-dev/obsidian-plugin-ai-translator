@@ -7,7 +7,7 @@ Translate your Obsidian notes using [l10n](https://l10n.dev).dev — an AI-power
 ## Features
 
 - Context-aware translations using advanced AI. Translate to 165+ languages. Generates and save AI glossaries for consistent terminology across translations.
-- Preserves Markdown formatting and struvture.
+- Preserves Markdown formatting and structure. Supports json, yaml, other plain-text formats.
 - Translate the active note via the command palette, ribbon icon, or right-click context menu.
 - Dynamic language search — type a language name to find it instantly (no hardcoded list)
 - Remembers your last used language — one keypress to repeat the same translation.
