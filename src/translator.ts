@@ -2,6 +2,7 @@ import { Notice, TFile } from "obsidian";
 import { LanguageSuggestModal } from "./LanguageSuggestModal";
 import { TranslationService } from "./TranslationService";
 import { Language, PluginWithSettings } from "./types";
+import { t, localizeUrl, getLocale, URLS } from "./i18n";
 
 const FRONTMATTER_REGEX = /^(---\r?\n[\s\S]*?\r?\n---\r?\n?)([\s\S]*)$/;
 
@@ -22,7 +23,7 @@ async function doTranslate(
 	try {
 		content = await plugin.app.vault.read(file);
 	} catch {
-		new Notice("Failed to read the note.");
+		new Notice(t("noticeReadFailed"));
 		return;
 	}
 
@@ -39,7 +40,7 @@ async function doTranslate(
 	let translated: string;
 	let charsUsed = 0;
 	let remainingBalance: number | null | undefined;
-	const progressNotice = new Notice("Translating…", 0);
+	const progressNotice = new Notice(t("noticeTranslating"), 0);
 	try {
 		const result = await TranslationService.translate(
 			plugin.settings.apiKey,
@@ -61,14 +62,18 @@ async function doTranslate(
 		const msg = err instanceof Error ? err.message : "";
 		if (msg === "unauthorized") {
 			new Notice(
-				"Invalid API key. Get your key at https://l10n.dev/ws/keys",
+				t("noticeInvalidKey", {
+					url: localizeUrl(URLS.API_KEYS, getLocale()),
+				}),
 			);
 		} else if (msg === "quota_exceeded") {
 			new Notice(
-				"Insufficient balance. Top up at https://l10n.dev/#pricing",
+				t("noticeInsufficientBalance", {
+					url: localizeUrl(URLS.PRICING, getLocale()),
+				}),
 			);
 		} else {
-			new Notice("Translation failed. Please try again.");
+			new Notice(t("noticeTranslationFailed"));
 		}
 		return;
 	}
@@ -100,13 +105,17 @@ async function doTranslate(
 		}
 		const balanceText =
 			remainingBalance != null
-				? ` ${remainingBalance.toLocaleString()} characters remaining.`
+				? t("noticeRemainingBalance", {
+						count: remainingBalance.toLocaleString(),
+					})
 				: "";
 		new Notice(
-			`Translation complete. Used ${charsUsed.toLocaleString()} characters.${balanceText}`,
+			t("noticeTranslationComplete", {
+				count: charsUsed.toLocaleString(),
+			}) + balanceText,
 		);
 	} catch {
-		new Notice("Failed to save the translated note.");
+		new Notice(t("noticeSaveFailed"));
 	}
 }
 
@@ -115,13 +124,13 @@ export function translateActiveNote(
 	targetFile?: TFile,
 ): void {
 	if (!plugin.settings.apiKey) {
-		new Notice("Please set your l10n.dev API key in settings.");
+		new Notice(t("noticeSetApiKey"));
 		return;
 	}
 
 	const file = targetFile ?? plugin.app.workspace.getActiveFile();
 	if (!file) {
-		new Notice("No active note to translate.");
+		new Notice(t("noticeNoActiveNote"));
 		return;
 	}
 
@@ -146,13 +155,13 @@ export function translateToLastLanguage(
 	}
 
 	if (!plugin.settings.apiKey) {
-		new Notice("Please set your l10n.dev API key in settings.");
+		new Notice(t("noticeSetApiKey"));
 		return;
 	}
 
 	const file = targetFile ?? plugin.app.workspace.getActiveFile();
 	if (!file) {
-		new Notice("No active note to translate.");
+		new Notice(t("noticeNoActiveNote"));
 		return;
 	}
 

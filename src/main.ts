@@ -2,6 +2,7 @@
 import { L10nSettings } from "./types";
 import { DEFAULT_SETTINGS, L10nSettingsTab } from "./settings";
 import { translateActiveNote, translateToLastLanguage } from "./translator";
+import { t } from "./i18n";
 
 export default class L10nPlugin extends Plugin {
 	settings: L10nSettings = { ...DEFAULT_SETTINGS };
@@ -9,13 +10,13 @@ export default class L10nPlugin extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		this.addRibbonIcon("languages", "Translate note", () => {
+		this.addRibbonIcon("languages", t("ribbonTooltip"), () => {
 			translateActiveNote(this);
 		});
 
 		this.addCommand({
 			id: "translate-current-note",
-			name: "Translate current note",
+			name: t("commandTranslateNote"),
 			callback: () => {
 				translateActiveNote(this);
 			},
@@ -23,7 +24,7 @@ export default class L10nPlugin extends Plugin {
 
 		this.addCommand({
 			id: "translate-to-last-language",
-			name: "Translate to last used language",
+			name: t("commandTranslateToLast"),
 			callback: () => {
 				translateToLastLanguage(this);
 			},
@@ -35,7 +36,7 @@ export default class L10nPlugin extends Plugin {
 				(menu: Menu, abstractFile: TAbstractFile) => {
 					if (!(abstractFile instanceof TFile)) return;
 					menu.addItem((item) => {
-						item.setTitle("Translate…")
+						item.setTitle(t("menuTranslate"))
 							.setIcon("languages")
 							.onClick(() => {
 								translateActiveNote(this, abstractFile);
@@ -51,7 +52,7 @@ export default class L10nPlugin extends Plugin {
 				(menu: Menu, abstractFile: TAbstractFile) => {
 					if (!(abstractFile instanceof TFile)) return;
 					menu.addItem((item) => {
-						item.setTitle("Translate to last used language")
+						item.setTitle(t("menuTranslateToLast"))
 							.setIcon("languages")
 							.onClick(() => {
 								translateToLastLanguage(this, abstractFile);
@@ -64,7 +65,7 @@ export default class L10nPlugin extends Plugin {
 		this.registerEvent(
 			this.app.workspace.on("editor-menu", (menu: Menu) => {
 				menu.addItem((item) => {
-					item.setTitle("Translate to last used language")
+					item.setTitle(t("menuTranslateToLast"))
 						.setIcon("languages")
 						.onClick(() => {
 							translateToLastLanguage(this);
@@ -76,7 +77,7 @@ export default class L10nPlugin extends Plugin {
 		this.registerEvent(
 			this.app.workspace.on("editor-menu", (menu: Menu) => {
 				menu.addItem((item) => {
-					item.setTitle("Translate…")
+					item.setTitle(t("menuTranslate"))
 						.setIcon("languages")
 						.onClick(() => {
 							translateActiveNote(this);

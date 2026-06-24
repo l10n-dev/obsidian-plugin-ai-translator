@@ -16,3 +16,7 @@ If your plugin does not need CSS, delete this file.
 	color: var(--text-on-accent);
 	vertical-align: middle;
 }
+
+.inline-link {
+	margin-left: 8px;
+}

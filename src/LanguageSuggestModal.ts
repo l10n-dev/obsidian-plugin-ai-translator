@@ -1,6 +1,7 @@
 import { App, SuggestModal } from "obsidian";
 import { Language } from "./types";
 import { TranslationService } from "./TranslationService";
+import { t } from "./i18n";
 
 export class LanguageSuggestModal extends SuggestModal<Language> {
 	private onSelect: (lang: Language) => void;
@@ -17,8 +18,8 @@ export class LanguageSuggestModal extends SuggestModal<Language> {
 		this.onSelect = onSelect;
 		this.setPlaceholder(
 			lastLanguage
-				? `Last used: ${lastLanguage.name} — type to change…`
-				: "Type a language name (e.g. Spanish, German)…",
+				? t("modalPlaceholderLastUsed", { name: lastLanguage.name })
+				: t("modalPlaceholderDefault"),
 		);
 	}
 
@@ -40,10 +41,12 @@ export class LanguageSuggestModal extends SuggestModal<Language> {
 	}
 
 	renderSuggestion(lang: Language, el: HTMLElement): void {
-		el.createEl("span", { text: `${lang.name} — ${lang.code}` });
+		el.createEl("span", {
+			text: t("modalSuggestion", { name: lang.name, code: lang.code }),
+		});
 		if (this.lastLanguage?.code === lang.code) {
 			el.createEl("span", {
-				text: "Last used",
+				text: t("modalLastUsedBadge"),
 				cls: "ai-translator-last-used-badge",
 			});
 		}

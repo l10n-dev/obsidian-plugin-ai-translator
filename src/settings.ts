@@ -1,6 +1,7 @@
 import { App, Plugin, PluginSettingTab, Setting } from "obsidian";
 import { L10nSettings, OutputBehavior, PluginWithSettings } from "./types";
 import { TranslationService } from "./TranslationService";
+import { t, localizeUrl, getLocale, URLS } from "./i18n";
 
 export type { L10nSettings };
 
@@ -23,36 +24,42 @@ export class L10nSettingsTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
-		new Setting(containerEl).setName("AI translator").setHeading();
+		new Setting(containerEl).setName(t("settingHeading")).setHeading();
 
 		// Balance refresh helper (defined before API key so onChange can call it)
 		const refreshBalance = (apiKey: string) => {
 			if (!apiKey) {
 				quotaEl.setText(
-					` ${(10000).toLocaleString()} characters free monthly.`,
+					t("settingBalanceFree", {
+						count: (10000).toLocaleString(),
+					}),
 				);
 				return;
 			}
-			quotaEl.setText(" Loading…");
+			quotaEl.setText(t("settingBalanceLoading"));
 			TranslationService.getBalance(apiKey)
 				.then((res) => {
 					quotaEl.setText(
-						` ${res.currentBalance.toLocaleString()} characters`,
+						t("settingBalanceCount", {
+							count: res.currentBalance.toLocaleString(),
+						}),
 					);
 				})
 				.catch(() => {
 					quotaEl.setText(
-						` ${(10000).toLocaleString()} characters free monthly.`,
+						t("settingBalanceFree", {
+							count: (10000).toLocaleString(),
+						}),
 					);
 				});
 		};
 
 		// API Key
 		const apiKeySetting = new Setting(containerEl)
-			.setName("API key")
+			.setName(t("settingApiKeyName"))
 			.addText((text) => {
 				text.inputEl.type = "password";
-				text.setPlaceholder("Paste your API key here")
+				text.setPlaceholder(t("settingApiKeyPlaceholder"))
 					.setValue(this.plugin.settings.apiKey)
 					.onChange(async (value) => {
 						this.plugin.settings.apiKey = value.trim();
@@ -60,20 +67,26 @@ export class L10nSettingsTab extends PluginSettingTab {
 						refreshBalance(this.plugin.settings.apiKey);
 					});
 			});
-		apiKeySetting.descEl.appendText("Your l10n.dev API key. Get one at ");
+		apiKeySetting.descEl.appendText(t("settingApiKeyDescPrefix"));
 		apiKeySetting.descEl.createEl("a", {
-			text: "l10n.dev/ws/keys",
-			href: "https://l10n.dev/ws/keys",
+			text: localizeUrl(URLS.API_KEYS, getLocale()).replace(
+				/^https?:\/\//,
+				"",
+			),
+			href: localizeUrl(URLS.API_KEYS, getLocale()),
 			attr: { target: "_blank", rel: "noopener noreferrer" },
 		});
 
 		// Quota display
 		const quotaSetting = new Setting(containerEl)
-			.setName("Remaining balance")
-			.setDesc("Characters remaining for translation.")
+			.setName(t("settingBalanceName"))
+			.setDesc(t("settingBalanceDesc"))
 			.addButton((btn) => {
-				btn.setButtonText("Buy characters").onClick(() => {
-					window.open("https://l10n.dev/#pricing", "_blank");
+				btn.setButtonText(t("settingBalanceBuyBtn")).onClick(() => {
+					window.open(
+						localizeUrl(URLS.PRICING, getLocale()),
+						"_blank",
+					);
 				});
 			});
 		const quotaEl = quotaSetting.descEl.createEl("span", { text: "" });
@@ -83,13 +96,13 @@ export class L10nSettingsTab extends PluginSettingTab {
 
 		// Output behavior
 		new Setting(containerEl)
-			.setName("Output behavior")
-			.setDesc("How translated content is saved.")
+			.setName(t("settingOutputName"))
+			.setDesc(t("settingOutputDesc"))
 			.addDropdown((dropdown) => {
 				dropdown
-					.addOption("new-note", "Create a new note")
-					.addOption("replace", "Replace current note content")
-					.addOption("append", "Append to current note")
+					.addOption("new-note", t("settingOutputNewNote"))
+					.addOption("replace", t("settingOutputReplace"))
+					.addOption("append", t("settingOutputAppend"))
 					.setValue(this.plugin.settings.outputBehavior)
 					.onChange(async (value) => {
 						this.plugin.settings.outputBehavior =
@@ -100,10 +113,8 @@ export class L10nSettingsTab extends PluginSettingTab {
 
 		// Translate frontmatter
 		new Setting(containerEl)
-			.setName("Translate frontmatter")
-			.setDesc(
-				"When enabled, YAML frontmatter will be included in the translation.",
-			)
+			.setName(t("settingFrontmatterName"))
+			.setDesc(t("settingFrontmatterDesc"))
 			.addToggle((toggle) => {
 				toggle
 					.setValue(this.plugin.settings.translateFrontmatter)
@@ -115,10 +126,8 @@ export class L10nSettingsTab extends PluginSettingTab {
 
 		// Generate glossary
 		const glossarySetting = new Setting(containerEl)
-			.setName("Generate & save glossary")
-			.setDesc(
-				"When enabled, creates a glossary based on the translation to ensure consistency between notes and saves it for future use. ",
-			)
+			.setName(t("settingGlossaryName"))
+			.setDesc(t("settingGlossaryDesc"))
 			.addToggle((toggle) => {
 				toggle
 					.setValue(this.plugin.settings.generateGlossary)
@@ -129,9 +138,16 @@ export class L10nSettingsTab extends PluginSettingTab {
 			});
 
 		glossarySetting.descEl.createEl("a", {
-			text: "Manage glossaries",
-			href: "https://l10n.dev/ws/translation-glossary",
+			text: t("settingGlossaryManageLink"),
+			href: localizeUrl(URLS.GLOSSARY, getLocale()),
 			attr: { target: "_blank", rel: "noopener noreferrer" },
+			cls: "inline-link",
+		});
+		glossarySetting.descEl.createEl("a", {
+			text: t("settingLinguisticLink"),
+			href: localizeUrl(URLS.LINGUISTIC, getLocale()),
+			attr: { target: "_blank", rel: "noopener noreferrer" },
+			cls: "inline-link",
 		});
 	}
 }
