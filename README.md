@@ -68,6 +68,36 @@ When **Generate & save glossary** is enabled (config) it automatically builds a 
 
 Manage your saved glossaries at [l10n.dev/ws/translation-glossary](https://l10n.dev/ws/translation-glossary).
 
+## Linguistic Instructions
+
+Linguistic Instructions let you guide AI:
+  📝 "Use formal tone"
+  📝 "Do not translate product names"
+  📝 "Use active voice"
+
+Unlike glossaries that control specific terms, Linguistic Instructions control the overall style, tone, and translation behavior.
+Combined with AI Glossaries, they give much more control over localization quality and brand consistency.
+
+Manage your saved linguistic Instructions at [l10n.dev/ws/linguistic-instructions](https://l10n.dev/ws/linguistic-instructions).
+
+## Localization
+
+The plugin interface is translated into the following languages:
+
+| Code | Language |
+|------|----------|
+| `en` | English (default) |
+| `de` | German |
+| `es` | Spanish |
+| `fr` | French |
+| `id` | Indonesian |
+| `it` | Italian |
+| `ja` | Japanese |
+| `ko` | Korean |
+| `pt` | Portuguese (Brazil) |
+| `zh-CN` | Chinese (Simplified) |
+| `zh-TW` | Chinese (Traditional) |
+
 ## Privacy
 
 Translation requests are sent to the [AI translation API](https://api.l10n.dev/doc/#l10n-api-latest/tag/ai-translation) over HTTPS. l10n.dev does not store your content after translation. See the [l10n.dev terms of service](https://l10n.dev/terms-of-service) for details.
