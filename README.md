@@ -80,6 +80,10 @@ Combined with AI Glossaries, they give much more control over localization quali
 
 Manage your saved linguistic Instructions at [l10n.dev/ws/linguistic-instructions](https://l10n.dev/ws/linguistic-instructions).
 
+## AI Localization Agent
+
+Turn your coding agent into a localization specialist. Add our MCP server to GitHub Copilot, Cursor, Claude, Codex, or Windsurf and let your agent translate i18n files without dumping unnecessary data to its context. See [AI Localization Agent Setup Guide](https://l10n.dev/help/ai-localization-agent)
+
 ## Localization
 
 The plugin interface is translated into the following languages:

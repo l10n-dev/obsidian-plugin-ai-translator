@@ -1,7 +1,7 @@
 import { Notice, TFile } from "obsidian";
 import { LanguageSuggestModal } from "./LanguageSuggestModal";
 import { TranslationService } from "./TranslationService";
-import { Language, PluginWithSettings } from "./types";
+import { Language, PluginWithSettings, TranslationUsage } from "./types";
 import { t, localizeUrl, getLocale, URLS } from "./i18n";
 
 const FRONTMATTER_REGEX = /^(---\r?\n[\s\S]*?\r?\n---\r?\n?)([\s\S]*)$/;
@@ -38,7 +38,15 @@ async function doTranslate(
 	}
 
 	let translated: string;
-	let charsUsed = 0;
+	let usage: TranslationUsage = {
+		charsUsed: 0,
+		details: {
+			sourceStringsCharCount: 0,
+			terminologyCharCount: 0,
+			glossaryCharCount: 0,
+			instructionCharCount: 0,
+		},
+	};
 	let remainingBalance: number | null | undefined;
 	const progressNotice = new Notice(t("noticeTranslating"), 0);
 	try {
@@ -55,7 +63,7 @@ async function doTranslate(
 			},
 		);
 		translated = result.translations;
-		charsUsed = result.usage.charsUsed;
+		usage = result.usage;
 		remainingBalance = result.remainingBalance;
 	} catch (err) {
 		progressNotice.hide();
@@ -111,8 +119,18 @@ async function doTranslate(
 				: "";
 		new Notice(
 			t("noticeTranslationComplete", {
-				count: charsUsed.toLocaleString(),
-			}) + balanceText,
+				count: usage.charsUsed.toLocaleString(),
+				sourceCount:
+					usage.details.sourceStringsCharCount.toLocaleString(),
+				glossaryCount: usage.details.glossaryCharCount.toLocaleString(),
+				instructionCount:
+					usage.details.instructionCharCount.toLocaleString(),
+				terminologyCount:
+					usage.details.terminologyCharCount.toLocaleString(),
+			}) +
+				"\r\n\r\n" +
+				balanceText,
+			20000,
 		);
 	} catch {
 		new Notice(t("noticeSaveFailed"));

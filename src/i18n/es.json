@@ -30,7 +30,7 @@
 	"noticeInvalidKey": "API key no válida. Obtén tu clave en {{url}}",
 	"noticeInsufficientBalance": "Saldo insuficiente. Recarga en {{url}}",
 	"noticeTranslationFailed": "Error en la traducción. Por favor, inténtalo de nuevo.",
-	"noticeTranslationComplete": "Traducción completada. Se han utilizado {{count}} caracteres.",
+	"noticeTranslationComplete": "Traducción completada. Se utilizaron {{count}} caracteres (contenido {{sourceCount}}, glosario {{glossaryCount}}, instrucción {{instructionCount}}, terminología {{terminologyCount}})",
 	"noticeRemainingBalance": " {{count}} caracteres restantes.",
 	"noticeSaveFailed": "Error al guardar la nota traducida.",
 	"noticeSetApiKey": "Por favor, configura tu API key de l10n.dev en los ajustes.",

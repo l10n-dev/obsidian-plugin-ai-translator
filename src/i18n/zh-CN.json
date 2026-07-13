@@ -30,7 +30,7 @@
 	"noticeInvalidKey": "API密钥无效。请在 {{url}} 获取您的密钥",
 	"noticeInsufficientBalance": "余额不足。请在 {{url}} 充值",
 	"noticeTranslationFailed": "翻译失败。请重试。",
-	"noticeTranslationComplete": "翻译完成。已使用 {{count}} 个字符。",
+	"noticeTranslationComplete": "翻译完成。已使用 {{count}} 个字符（内容 {{sourceCount}}，词汇表 {{glossaryCount}}，指令 {{instructionCount}}，术语 {{terminologyCount}}）",
 	"noticeRemainingBalance": " 剩余 {{count}} 个字符。",
 	"noticeSaveFailed": "保存翻译后的笔记失败。",
 	"noticeSetApiKey": "请在设置中配置您的l10n.dev API密钥。",

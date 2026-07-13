@@ -23,10 +23,20 @@ export interface TranslateRequest {
 	client?: string;
 }
 
+export interface TranslationUsage {
+	charsUsed: number;
+	details: {
+		sourceStringsCharCount: number;
+		terminologyCharCount: number;
+		glossaryCharCount: number;
+		instructionCharCount: number;
+	};
+}
+
 export interface TranslateResponse {
 	translations: string;
 	finishReason: string;
-	usage: { charsUsed: number };
+	usage: TranslationUsage;
 	remainingBalance?: number | null;
 }
 

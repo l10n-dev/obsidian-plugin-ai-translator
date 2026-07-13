@@ -30,7 +30,7 @@
 	"noticeInvalidKey": "Chave de API inválida. Obtenha sua chave em {{url}}",
 	"noticeInsufficientBalance": "Saldo insuficiente. Recarregue em {{url}}",
 	"noticeTranslationFailed": "Falha na tradução. Tente novamente.",
-	"noticeTranslationComplete": "Tradução concluída. {{count}} caracteres usados.",
+	"noticeTranslationComplete": "Tradução concluída. Foram usados {{count}} caracteres (conteúdo {{sourceCount}}, glossário {{glossaryCount}}, instrução {{instructionCount}}, terminologia {{terminologyCount}})",
 	"noticeRemainingBalance": " {{count}} caracteres restantes.",
 	"noticeSaveFailed": "Falha ao salvar a nota traduzida.",
 	"noticeSetApiKey": "Por favor, defina sua chave de API l10n.dev nas configurações.",
