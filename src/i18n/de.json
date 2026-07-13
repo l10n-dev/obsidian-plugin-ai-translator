@@ -30,7 +30,7 @@
 	"noticeInvalidKey": "Ungültiger API-Schlüssel. Erhalten Sie Ihren Schlüssel unter {{url}}",
 	"noticeInsufficientBalance": "Guthaben nicht ausreichend. Laden Sie es unter {{url}} auf.",
 	"noticeTranslationFailed": "Übersetzung fehlgeschlagen. Bitte versuchen Sie es erneut.",
-	"noticeTranslationComplete": "Übersetzung abgeschlossen. {{count}} Zeichen verwendet.",
+	"noticeTranslationComplete": "Übersetzung abgeschlossen. Es wurden {{count}} Zeichen verwendet (Inhalt {{sourceCount}}, Lexikon {{glossaryCount}}, Anweisung {{instructionCount}}, Terminologie {{terminologyCount}})",
 	"noticeRemainingBalance": " {{count}} Zeichen verbleibend.",
 	"noticeSaveFailed": "Übersetzte Notiz konnte nicht gespeichert werden.",
 	"noticeSetApiKey": "Bitte legen Sie Ihren l10n.dev API-Schlüssel in den Einstellungen fest.",
