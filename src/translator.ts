@@ -117,21 +117,30 @@ async function doTranslate(
 						count: remainingBalance.toLocaleString(),
 					})
 				: "";
-		new Notice(
-			t("noticeTranslationComplete", {
-				count: usage.charsUsed.toLocaleString(),
-				sourceCount:
-					usage.details.sourceStringsCharCount.toLocaleString(),
-				glossaryCount: usage.details.glossaryCharCount.toLocaleString(),
-				instructionCount:
-					usage.details.instructionCharCount.toLocaleString(),
-				terminologyCount:
-					usage.details.terminologyCharCount.toLocaleString(),
-			}) +
-				"\r\n\r\n" +
-				balanceText,
-			20000,
-		);
+
+		if (usage.charsUsed > usage.details.sourceStringsCharCount) {
+			new Notice(
+				t("noticeTranslationCompleteExtended", {
+					count: usage.charsUsed.toLocaleString(),
+					sourceCount:
+						usage.details.sourceStringsCharCount.toLocaleString(),
+					glossaryCount:
+						usage.details.glossaryCharCount.toLocaleString(),
+					instructionCount:
+						usage.details.instructionCharCount.toLocaleString(),
+					terminologyCount:
+						usage.details.terminologyCharCount.toLocaleString(),
+				}) + (remainingBalance != null ? "\r\n\r\n" + balanceText : ""),
+				20000,
+			);
+		} else {
+			new Notice(
+				t("noticeTranslationComplete", {
+					count: usage.charsUsed.toLocaleString(),
+				}) + balanceText,
+				20000,
+			);
+		}
 	} catch {
 		new Notice(t("noticeSaveFailed"));
 	}
