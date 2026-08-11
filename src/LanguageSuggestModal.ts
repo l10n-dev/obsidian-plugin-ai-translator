@@ -41,11 +41,11 @@ export class LanguageSuggestModal extends SuggestModal<Language> {
 	}
 
 	renderSuggestion(lang: Language, el: HTMLElement): void {
-		el.createEl("span", {
+		el.createSpan({
 			text: t("modalSuggestion", { name: lang.name, code: lang.code }),
 		});
 		if (this.lastLanguage?.code === lang.code) {
-			el.createEl("span", {
+			el.createSpan({
 				text: t("modalLastUsedBadge"),
 				cls: "ai-translator-last-used-badge",
 			});
