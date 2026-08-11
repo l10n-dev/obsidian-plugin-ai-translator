@@ -1,7 +1,12 @@
-﻿import { Menu, Plugin, TAbstractFile, TFile } from "obsidian";
+﻿import { Editor, Menu, Plugin, TAbstractFile, TFile } from "obsidian";
 import { L10nSettings } from "./types";
 import { DEFAULT_SETTINGS, L10nSettingsTab } from "./settings";
-import { translateActiveNote, translateToLastLanguage } from "./translator";
+import {
+	translateActiveNote,
+	translateSelection,
+	translateSelectionToLastLanguage,
+	translateToLastLanguage,
+} from "./translator";
 import { t } from "./i18n";
 
 export default class L10nPlugin extends Plugin {
@@ -27,6 +32,16 @@ export default class L10nPlugin extends Plugin {
 			name: t("commandTranslateToLast"),
 			callback: () => {
 				translateToLastLanguage(this);
+			},
+		});
+
+		this.addCommand({
+			id: "translate-selection",
+			name: t("commandTranslateSelection"),
+			editorCheckCallback: (checking: boolean, editor: Editor) => {
+				if (!editor.somethingSelected()) return false;
+				if (!checking) translateSelection(this, editor);
+				return true;
 			},
 		});
 
@@ -63,27 +78,54 @@ export default class L10nPlugin extends Plugin {
 		);
 
 		this.registerEvent(
-			this.app.workspace.on("editor-menu", (menu: Menu) => {
-				menu.addItem((item) => {
-					item.setTitle(t("menuTranslateToLast"))
-						.setIcon("languages")
-						.onClick(() => {
-							translateToLastLanguage(this);
-						});
-				});
-			}),
+			this.app.workspace.on(
+				"editor-menu",
+				(menu: Menu, editor: Editor) => {
+					const hasSelection = editor.somethingSelected();
+					menu.addItem((item) => {
+						item.setTitle(
+							hasSelection
+								? t("menuTranslateSelectionToLast")
+								: t("menuTranslateToLast"),
+						)
+							.setIcon("languages")
+							.onClick(() => {
+								if (hasSelection) {
+									translateSelectionToLastLanguage(
+										this,
+										editor,
+									);
+								} else {
+									translateToLastLanguage(this);
+								}
+							});
+					});
+				},
+			),
 		);
 
 		this.registerEvent(
-			this.app.workspace.on("editor-menu", (menu: Menu) => {
-				menu.addItem((item) => {
-					item.setTitle(t("menuTranslate"))
-						.setIcon("languages")
-						.onClick(() => {
-							translateActiveNote(this);
-						});
-				});
-			}),
+			this.app.workspace.on(
+				"editor-menu",
+				(menu: Menu, editor: Editor) => {
+					const hasSelection = editor.somethingSelected();
+					menu.addItem((item) => {
+						item.setTitle(
+							hasSelection
+								? t("menuTranslateSelection")
+								: t("menuTranslate"),
+						)
+							.setIcon("languages")
+							.onClick(() => {
+								if (hasSelection) {
+									translateSelection(this, editor);
+								} else {
+									translateActiveNote(this);
+								}
+							});
+					});
+				},
+			),
 		);
 
 		this.addSettingTab(new L10nSettingsTab(this.app, this));
