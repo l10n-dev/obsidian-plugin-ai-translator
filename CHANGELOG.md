@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] — 2026-08-11
+
+- Settings are now discoverable in Obsidian's settings search on 1.13.0 and later (declarative settings API); older versions are unaffected
+
 ## [1.3.0] — 2026-08-11
 
 - Translate selected text from the editor context menu; falls back to the whole note when nothing is selected
