@@ -8,7 +8,7 @@ Translate your Obsidian notes using [l10n](https://l10n.dev).dev — an AI-power
 
 - Context-aware translations using advanced AI. Translate to 165+ languages. Generates and save AI glossaries for consistent terminology across translations.
 - Preserves Markdown formatting and structure. Supports json, yaml, other plain-text formats.
-- Translate the active note via the command palette, ribbon icon, or right-click context menu.
+- Translate the active note — or just the selected text — via the command palette, ribbon icon, or right-click context menu.
 - Dynamic language search — type a language name to find it instantly (no hardcoded list)
 - Remembers your last used language — one keypress to repeat the same translation.
 - Three output modes: create a new note, replace the current note, or append the translation.
@@ -42,6 +42,14 @@ With a note open, trigger translation in any of these ways:
 
 A language picker will open. Type a language name (e.g. "Spanish", "German", "Japanese") and select your target language. The translation will be saved according to your output behavior setting.
 
+### Translate a selection
+
+Select text in the editor and right-click it — the context menu items become **Translate selection…** and **Translate selection to last used language**. The translated text replaces your selection in place; press `Ctrl+Z` / `Cmd+Z` to undo. With nothing selected, the same menu items translate the whole note as before.
+
+The **Output behavior** setting does not apply to selections — a translated selection is always replaced in place.
+
+For a keyboard-driven workflow, assign a hotkey to the **Translate selection** command in **Settings → Hotkeys**. The command is only available while text is selected.
+
 ### Repeat translation to the same language
 
 After your first translation, the last used language is saved automatically. The next time the language picker opens, it pre-selects that language — press Enter to confirm without typing anything.
@@ -55,6 +63,8 @@ For even faster repeat translations, use the **Translate to last used language**
 | Create a new note (default) | Saves translation as `{filename} ({lang-code}).md` in the same folder |
 | Replace current note content | Overwrites the current note with the translation |
 | Append to current note | Appends the translation below a horizontal rule |
+
+These modes apply to whole-note translation only. A translated selection always replaces the selection in place.
 
 ## Translation Glossary
 
